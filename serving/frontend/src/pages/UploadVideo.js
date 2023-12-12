@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Spin, Upload, message, Form, Input, Space, Button, Modal } from 'antd';
 import { InboxOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { FACE_API, LAUGHTER_API } from '../config';
 import { LaughterContext } from '../context';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -98,7 +97,7 @@ function UploadVideo() {
     const getFaceClustering = () => {
       return axios({
         method: "post",
-        url: `${FACE_API}/upload-video`, 
+        url: `${process.env.REACT_APP_FACE_API}/upload-video`, 
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -109,7 +108,7 @@ function UploadVideo() {
     const getLaughterDetection = () => {
       return axios({
         method: "post",
-        url: `${LAUGHTER_API}/laughter-detection`,
+        url: `${process.env.REACT_APP_LAUGHTER_API}/laughter-detection`,
         data: formData,
         headers: {
           "Content-Type": "multipart/form-data",
@@ -118,7 +117,7 @@ function UploadVideo() {
     };
 
     const getPeopleImg = async (res) => {
-      return await axios.get(`${FACE_API}/show-people`, {params: {"id":  res}}
+      return await axios.get(`${process.env.REACT_APP_FACE_API}/show-people`, {params: {"id":  res}}
       ).then((response) => {
         setPeople(response.data.people_img)
         setLoading(false);
@@ -165,7 +164,7 @@ function UploadVideo() {
     const getFaceClustering = () => {
       return axios({
         method: "post",
-        url: `${FACE_API}/upload-video-youtube`, 
+        url: `${process.env.REACT_APP_FACE_API}/upload-video-youtube`, 
         data: url,
       });
     };
@@ -173,13 +172,13 @@ function UploadVideo() {
     const getLaughterDetection = () => {
       return axios({
         method: "post",
-        url: `${LAUGHTER_API}/laughter-detection-youtube`,
+        url: `${process.env.REACT_APP_LAUGHTER_API}/laughter-detection-youtube`,
         data: url,
       });
     };
 
     const getPeopleImg = async (res) => {
-      return await axios.get(`${FACE_API}/show-people`, {params: {"id":  res}}
+      return await axios.get(`${process.env.REACT_APP_FACE_API}/show-people`, {params: {"id":  res}}
       ).then((response) => {
         setPeople(response.data.people_img)
         setLoading(false);

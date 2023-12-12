@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useState, useContext, useEffect } from 'react';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
-import { STORAGE, FACE_API } from '../config';
 import { LaughterContext } from '../context';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -42,7 +41,7 @@ function PeoplePanel(props) {
             person.push(
                 <StyledPerson key={prop}>
                     <div>
-                        <Avatar size={80} src={<Image src={STORAGE + people[prop]} />}  />
+                        <Avatar size={80} src={<Image src={process.env.REACT_APP_STORAGE + people[prop]} />}  />
                     </div>
                     <div style={{paddingLeft: "10px", paddingRight: "10px", textAlign: "center",flexGrow: "1", justifyContent: "center", fontSize: "15px"}}>
                         <div>{prop}</div>
@@ -58,7 +57,7 @@ function PeoplePanel(props) {
 
     const getHighlight = async(res) => {
         await axios.post(
-            `${FACE_API}/timeline-highlight`, res
+            `${process.env.REACT_APP_FACE_API}/timeline-highlight`, res
         ).then((response) => {
             setLoading(false);
             handleClick(response.data);
@@ -73,7 +72,7 @@ function PeoplePanel(props) {
         const FaceTimeline = () => {
             return axios({
                 method:"post",
-                url : `${FACE_API}/timeline-face`, 
+                url : `${process.env.REACT_APP_FACE_API}/timeline-face`, 
                 data : {"face": checkedList, "id":props.id}
             });
         };

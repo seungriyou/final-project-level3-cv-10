@@ -4,7 +4,6 @@ import { Col, Row, Checkbox } from 'antd';
 import { DownloadPanel } from '../components';
 import { Video } from '../components';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { STORAGE } from '../config';
 
 
 function SelectVideo() {
@@ -35,7 +34,7 @@ function SelectVideo() {
         for (var i in shorts) {
             cards.push(
                 <Col xxl={8} xl={8} lg={12} md={12} xs={24} key={i} style={{display: "flex"}}>
-                    <Video index={i} shorts={shorts} URL={STORAGE} response={location.state} />
+                    <Video index={i} shorts={shorts} URL={process.env.REACT_APP_STORAGE} response={location.state} />
                 </Col>
             );
         };
@@ -73,7 +72,7 @@ function SelectVideo() {
                             </Row>
                         </Checkbox.Group>
                     </div>
-                    <DownloadPanel URL={STORAGE} response={location.state} checkedList={checkedList} 
+                    <DownloadPanel URL={process.env.REACT_APP_STORAGE} response={location.state} checkedList={checkedList} 
                                     checkAll={checkAll} onCheckAll={onCheckAllChange}/>
                 </StyledArea> 
             ) }
